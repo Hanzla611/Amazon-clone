@@ -9,7 +9,7 @@ function Login() {
               <img
               className="login_logo"
               src="ama2.png"
-              alt=""
+              alt=" "
               />
           </Link>
 
