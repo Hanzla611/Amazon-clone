@@ -12,7 +12,7 @@ function Checkout() {
         <div className="checkout">
             <div className="checkout_left">
 
-            <img className="checkout_ad"  src="cover.jpg" alt="" />
+            <img className="checkout_ad"  src="basketTop.jpg" alt="" />
             
             { basket?.length === 0 ? (
                 <div>

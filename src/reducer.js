@@ -1,22 +1,24 @@
-export const getBasketTotal = (basket) =>
- basket?.reduce((amount, item ) => item.price + amount, 0);
 
 export const initialState = {
-    basket: [{
-        id: "12321341",
-        title: "The lean startup: Now constant Innovation Creation",
-        price: 11.96,
-        rating: 5,
-        image: "harry.jpg"
-    },
-    ],
+    basket: [],
     user: null,
    
 };
 
+export const getBasketTotal = (basket) =>
+basket?.reduce((amount, item ) => item.price + amount, 0);
+
+
+
 
 const reducer  =  (state, action) =>  {
+    
     switch(action.type) {
+        case "SET_USER ":
+            return{
+                ...state,
+                user: action.user,
+            };
         case 'ADD_TO_BASKET' :
             return { 
                 ...state,

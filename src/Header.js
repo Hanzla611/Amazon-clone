@@ -4,15 +4,21 @@ import { Link } from 'react-router-dom';
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { useStateValue } from './StateProvider';
+import { auth } from './Firebase';
 
 function Header() {
 
-    const [{basket}] = useStateValue();
+    const [{ basket, user }] = useStateValue();
+   
+    const login = () => {
+        if (user) {
+            auth.signOut();
+        }
+    };
 
 
-
-
-    return <nav className='header'>
+    return (
+    <nav className='header'>
             <Link to="/">
              <img 
               className='header_logo' 
@@ -29,10 +35,10 @@ function Header() {
         
         
         <div className="header_nav">
-            <Link to="/login" className="header_link">
-               <div className="header_option">
-                    <span className="header_optionLineOne">Hello</span>
-                    <span className="header_optionLineTwo">Sign In</span>
+            <Link to={!user && "/login"} className="header_link">
+               <div onClick={login} className="header_option">
+                    <span className="header_optionLineOne">Hello {user?.email}</span>
+                    <span className="header_optionLineTwo">{user ? 'Sign out' : "Sign in "}</span>
                </div>
             </Link>
         </div>
@@ -40,7 +46,7 @@ function Header() {
             
 
         <div className="header_nav">
-            <Link to="/login" className="header_link">
+            <Link to ={"/login"} className="header_link">
                <div className="header_option">
                     <span className="header_optionLineOne">Return</span>
                     <span className="header_optionLineTwo">& Orders</span>
@@ -49,7 +55,7 @@ function Header() {
         </div>
 
         <div className="header_nav">
-            <Link to="/login" className="header_link">
+            <Link to={"/login"} className="header_link">
                <div className="header_option">
                     <span className="header_optionLineOne">Your</span>
                     <span className="header_optionLineTwo">Prime</span>
@@ -67,6 +73,6 @@ function Header() {
 
             
     </nav>
-}
+    )}
 
 export default Header
